@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Freelance Money</title>
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Combo&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <h1>Freelance Money Calculator</h1>
+  </header>
+
+  <main>
+    <form id="formContainer">
+      
+      <!-- Start : Section Pricing -->
+      <section id="pricing">
+        <fieldset class="settings">
+          <legend>Vos tarifs</legend>
+          <div class="inputContainer">
+            <label for="thPrice">Taux Horaire</label>
+            <input id="thPrice" name="thPrice" type="number">
+          </div>
+          <div class="inputContainer">
+            <label for="tjmPrice">Taux Journalier Moyen</label>
+            <input id="tjmPrice" name="tjmPrice" type="number">
+          </div>
+          <div class="inputContainer">
+            <label for="extrasPrice">Extras</label>
+            <input id="extrasPrice" name="extrasPrice" type="number">
+          </div>
+        </fieldset>
+      </section>
+      <!-- End : Section Pricing -->
+
+      <!-- Start : Section Quantity -->
+      <section id="qte">
+        <fieldset class="settings">
+          <legend>Vos quantités</legend>
+          <div class="inputContainer">
+              <label for="thQte">Nombre d'heures</label>
+              <input id="thQte" name="thQte" type="number">
+            </div>
+            <div class="inputContainer">
+              <label for="tjmQte">Nombre de jours</label>
+              <input id="tjmQte" name="tjmQte" type="number">
+            </div>
+            <div class="inputContainer">
+              <label for="extrasQte">Nombre d'extras</label>
+              <input id="extrasQte" name="extrasQte" type="number">
+            </div>
+        </fieldset>
+      </section>
+      <!-- End : Section Quantity -->
+
+      <!-- Start : Section Fees -->
+      <section id="fees">
+        <fieldset class="settings">
+          <legend>Vos charges</legend>
+          <div class="inputContainer">
+            <input type="number" id="feesSet" name="feesSet">
+            </div>
+          </fieldset>
+      </section>
+      <!-- End : Section Fees -->
+      
+      <!-- Start : Section Validation -->
+      <section id="validation">
+        <button type="button" id="btn">Calculer</button>
+      </section>
+      <!-- End : Section Validation -->
+
+      <!-- Start : Section Result -->
+      <section id="result">
+        <div class="total">
+          <p>Brut</p>
+          <span id="brutResult">0€</span>
+        </div>
+        <div class="total">
+          <p>Taxes</p>
+          <span id="taxes">0€</span>
+        </div>
+        <div class="total">
+          <p>Net</p>
+          <span id="netResult">0€</span>
+        </div>
+      </section>
+      <!-- End : Section Result -->
+    </form>
+  </main>
+
+  <!-- Liens vers jQuery et autres librairies -->
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0.0/jquery.counterup.min.js"></script>
+
+  <!-- Mon script -->
+  <script src="index.js"></script>
+</body>
+</html>
