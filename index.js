@@ -8,32 +8,55 @@ const calculGain = () => {
   let formObj = new FormData(myForm);
 
   // Récupération des inputs par leur name
-  let tauxHoraire = formObj.get("thPrice");
-  let tauxJournalier = formObj.get("tjmPrice");
-  let extras = formObj.get("extrasPrice");
+  let calculDatas = {
+    tauxHoraire: formObj.get("thPrice"),
+    tauxJournalier: formObj.get("tjmPrice"),
+    extras: formObj.get("extrasPrice"),
 
-  let qteHoraire = formObj.get("thQte");
-  let qteJournalier = formObj.get("tjmQte");
-  let qteExtras = formObj.get("extrasQte");
+    qteHoraire: formObj.get("thQte"),
+    qteJournalier: formObj.get("tjmQte"),
+    qteExtras: formObj.get("extrasQte"),
 
-  let charges = formObj.get("feesSet");
+    charges: formObj.get("feesSet"),
+
+    gainHeure: function () {
+      return this.tauxHoraire * this.qteHoraire;
+    },
+    gainJournalier: function () {
+      return this.tauxJournalier * this.qteJournalier;
+    },
+    gainExtras: function () {
+      return this.extras * this.qteExtras;
+    },
+
+    totalBrut: function () {
+      return this.gainHeure() + this.gainJournalier() + this.gainExtras();
+    },
+    fees: function () {
+      return this.totalBrut() * (this.charges / 100);
+    },
+    totalNet: function () {
+      return this.totalBrut() - this.fees();
+    },
+  };
 
   // Calcul des gains
-  let gainHeure = tauxHoraire * qteHoraire;
-  let gainJournalier = tauxJournalier * qteJournalier;
-  let gainExtras = extras * qteExtras;
 
   // Brut
-  let totalBrut = gainHeure + gainJournalier + gainExtras;
-  document.getElementById("brutResult").innerText = `${totalBrut.toFixed(2)} €`;
+
+  document.getElementById("brutResult").innerText = `${calculDatas
+    .totalBrut()
+    .toFixed(2)} €`;
 
   // Taxes
-  let fees = totalBrut * (charges / 100);
-  document.getElementById("taxes").innerText = `${fees.toFixed(2)} €`;
+  document.getElementById("taxes").innerText = `${calculDatas
+    .fees()
+    .toFixed(2)} €`;
 
   // Net
-  let totalNet = totalBrut - fees;
-  document.getElementById("netResult").innerText = `${totalNet.toFixed(2)} €`;
+  document.getElementById("netResult").innerText = `${calculDatas
+    .totalNet()
+    .toFixed(2)} €`;
 };
 
 // FONCTION VERIFICATION DES INPUTS (si > 0)
@@ -47,9 +70,16 @@ const checkInputs = () => {
 
 // AJOUT DES EVENTS
 
-// 1 - Bouton "Calculer"
-let calculBtn = document.getElementById("btn");
-calculBtn.addEventListener("click", calculGain);
+// 1 - Bouton "Reset"
+let resetBtn = document.getElementById("btn");
+
+const resetAll = () => {
+  document.getElementById("brutResult").innerText = "0.00 €";
+  document.getElementById("taxes").innerText = "0.00 €";
+  document.getElementById("netResult").innerText = "0.00 €";
+};
+
+resetBtn.addEventListener("click", resetAll);
 
 // 2 - Inputs onkeyup
 let myInputs = document.querySelectorAll("input");
